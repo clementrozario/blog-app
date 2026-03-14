@@ -1,13 +1,17 @@
+import { useNavigate } from 'react-router-dom'
 
-
-function Post(props){
+function Post(props) {
+    const navigate = useNavigate();
     return (
         <div style={{
             padding: 20,
             width: 300,
             margin:10,
-            border:"solid 3px"
-        }}>
+            border: "solid 3px",
+            cursor: 'pointer',
+        }}
+            onClick={()=>navigate(`/edit-post/${props.post.id}`)}
+        >
             <h4>{props.post.title}</h4>
             <p>{props.post.content}</p>
         </div>

@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+
 export const PostContext = createContext();
 
 function PostProvider(props) {
@@ -21,8 +22,16 @@ function PostProvider(props) {
         setPosts((prev) => [...prev, { ...newPost, id: lastId + 1 }]);
     }
 
+    function findPostById(id) {
+        return posts.find((post)=>post.id === id)
+    }
+
+    function updatedPost(updatedPost) {
+        setPosts((prev) => prev.map((post)=> post.id === updatedPost.id ? updatedPost : post));
+    }
+
     return (
-        <PostContext.Provider value={{ posts, addPost }}>
+        <PostContext.Provider value={{ posts, addPost,findPostById,updatedPost }}>
             {props.children}
         </PostContext.Provider>
     )
